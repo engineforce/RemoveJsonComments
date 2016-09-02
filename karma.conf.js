@@ -15,8 +15,6 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/Libs/*.js',
-      'node_modules/lodash/lodash.js',
       'src/*.js',
       'spec/**/*.js'
     ],
