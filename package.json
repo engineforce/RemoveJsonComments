@@ -1,7 +1,7 @@
 {
-  "name": "remove-json-comments",
+  "name": "remove-json-comments-js",
   "version": "1.0.0",
-  "description": "Remove comments from JSON (currently only remove block comments /**/)",
+  "description": "Remove comments from JSON, please use strip-json-comments package instead.",
   "main": "src/removeJsonComments.js",
   "scripts": {
     "test": "node_modules\\.bin\\jasmine",
@@ -40,5 +40,8 @@
     "lodash": "^4.13.1",
     "merge2": "^1.0.2",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "strip-json-comments": "^2.0.1"
   }
 }

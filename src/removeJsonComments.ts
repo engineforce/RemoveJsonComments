@@ -14,39 +14,47 @@ interface IRemoveJsonComments {
     }
     else if (typeof define === 'function' && define.amd) {
         define(["require", "exports"], factory);
-    } 
+    }
     else {
         // Browser globals (root is window)
         let browserRequire = (name) => {
+            if (name.indexOf("strip-json-comments") > -1 && root.stripJsonComments) {
+                return root.stripJsonComments;
+            }
+            
             throw new Error("Unable to require: " + name);
         }
         root.removeJsonComments = factory(browserRequire, {});
     }
 })(this, function (require, exports) {
 
-    function _removeComments(input) {
+    // Find out that this library does everything I need.
+    var stripJsonComments = require("strip-json-comments");
+    return (input) => stripJsonComments(input, { whitespace: false });
 
-        while (input) {
-            var startCommentIndex = input.indexOf("/*");
+    // function _removeComments(input) {
 
-            if (startCommentIndex <= -1)
-                break;
+    //     while (input) {
+    //         var startCommentIndex = input.indexOf("/*");
 
-            var endCommentIndex = input.indexOf("*/");
-            if (endCommentIndex <= -1)
-                break;
+    //         if (startCommentIndex <= -1)
+    //             break;
 
-            if (startCommentIndex > -1 && endCommentIndex > -1 && startCommentIndex < endCommentIndex) {
-                input = input.substr(0, startCommentIndex) + input.substr(endCommentIndex + 2);
-            }
-        }
+    //         var endCommentIndex = input.indexOf("*/");
+    //         if (endCommentIndex <= -1)
+    //             break;
 
-        return input;
+    //         if (startCommentIndex > -1 && endCommentIndex > -1 && startCommentIndex < endCommentIndex) {
+    //             input = input.substr(0, startCommentIndex) + input.substr(endCommentIndex + 2);
+    //         }
+    //     }
 
-        //aValue = aValue.replace(/(?:\/\*(?:[\s\S]*?)\*\/)|(?:^\s*\/\/(?:.*)$)/gm, '$1');
-    }
+    //     return input;
 
-    return _removeComments;
+    //     //aValue = aValue.replace(/(?:\/\*(?:[\s\S]*?)\*\/)|(?:^\s*\/\/(?:.*)$)/gm, '$1');
+    // }
+
+    // return _removeComments;
 });
 
 
